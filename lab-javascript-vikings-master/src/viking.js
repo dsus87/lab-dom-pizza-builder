@@ -80,4 +80,28 @@ saxonOne.receiveDamage(110)
 
 
 // War
-//class War{}
+
+class War {
+    constructor(){
+    this.vikingArmy = [];
+    this.saxonArmy = [];
+}
+
+addViking(viking) {
+    this.vikingArmy.push(viking)
+    console.log (this.vikingArmy.length)
+}
+
+addSaxon(saxon) {
+    this.saxonArmy.push(saxon)
+    console.log (this.saxonArmy.length)
+}
+
+vikingAttack() {
+
+}
+    
+}
+
+
+
