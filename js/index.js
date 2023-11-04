@@ -84,22 +84,76 @@ document.querySelectorAll('.sauce').forEach((whiteSauce) => {
 
 function renderGlutenFreeCrust() {
   // Iteration 2: add/remove the class "crust-gluten-free" of `<section class="crust">`
-
-  document.querySelectorAll('.crust').forEach((glutenFreeCrust) => {
-    if(state.glutenFreeCrust){
-      glutenFreeCrust.style.visibility = 'visible';
-    } else {
-      glutenFreeCrust.style.visibility = 'hidden';
-    }
-    })
+document.querySelectorAll('.crust').forEach((glutenFreeCrust)=> {
+  if(state.glutenFreeCrust){
+    glutenFreeCrust.style.visibility = 'visible';
+  } else {
+    glutenFreeCrust.style.visibility = 'hidden';    
+  }
+  })
 }
+
 
 function renderButtons() {
-  // Iteration 3: add/remove the class "active" of each `<button class="btn">`
+
+    // Iteration 3: add/remove the class "active" of each `<button class="btn">`
+
+  if (state.pepperoni) {
+    document.querySelector('.btn.btn-pepperoni').classList.remove('active');
+  } else {
+    document.querySelector('.btn.btn-pepperoni').classList.add('active');
+  }
+
+  if (state.mushrooms) {
+    document.querySelector('.btn.btn-mushrooms').classList.remove('active');
+  } else {
+    document.querySelector('.btn.btn-mushrooms').classList.add('active');
+  }
+
+  if (state.greenPeppers) {
+    document.querySelector('.btn.btn-green-peppers').classList.remove('active');
+  } else {
+    document.querySelector('.btn.btn-green-peppers').classList.add('active');
+  }
+
+  if (state.whiteSauce) {
+    document.querySelector('.btn.btn-sauce').classList.remove('active');
+  } else {
+    document.querySelector('.btn.btn-sauce').classList.add('active');
+  }
+
+  if (state.glutenFreeCrust) {
+    document.querySelector('.btn.btn-crust').classList.remove('active');
+  } else {
+    document.querySelector('.btn.btn-crust').classList.add('active');
+  }
 }
+
+
+
+
 
 function renderPrice() {
   // Iteration 4: change the HTML of `<aside class="panel price">`
+
+  let totalPrice = basePrice;
+  const priceList = document.querySelector('.panel.price ul');
+  const totalPriceElement = document.querySelector('.panel.price strong');
+
+  priceList.innerHTML = '';
+
+  for (const ingredientType in ingredients) {
+    if (state[ingredientType]) {   // checking to see if it's truthy
+      totalPrice += ingredients[ingredientType].price;
+
+      
+      const listItem = document.createElement('li');
+      listItem.textContent = `$${ingredients[ingredientType].price} ${ingredients[ingredientType].name}`;
+      priceList.appendChild(listItem);
+    }
+  }
+  totalPriceElement.textContent = `$${totalPrice}`;
+
 }
 
 renderEverything();
